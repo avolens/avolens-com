@@ -1,3 +1,21 @@
-baseURL = 'http://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+theme = "lynx"
+title = "AVOLENS"
+
+
+enableEmoji = true
+disableKinds = ["taxonomy", "term"]
+
+[author]
+  name = "AVOLENS"
+  headline = "Modern Cloud and Kubernetes Security"
+  image = "img/avolens-logo.png"
+  links = [
+    { avolens = { href = "mailto:info@avolens.com", text = "Contact us", icon = "email" } },
+    { avolens = { href = "https://kubernetes-security.de", text = "Visit our blog", icon = "medium" } },
+    { github = "https://github.com/avolens/" },
+  ]
+
+[markup.highlight]
+  noClasses = false
+[Params]
+  custom_css = ["css/avolens.css"]

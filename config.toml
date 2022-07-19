@@ -9,6 +9,7 @@ disableKinds = ["taxonomy", "term"]
   name = "AVOLENS"
   headline = "Modern Cloud and Kubernetes Security"
   image = "img/avolens-logo.png"
+  imagedark = "img/avolens-logo-dark.png"
   links = [
     { avolens = { href = "mailto:info@avolens.com", text = "Contact us", icon = "email" } },
     { avolens = { href = "https://kubernetes-security.de", text = "Visit our blog", icon = "medium" } },

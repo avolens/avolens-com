@@ -1,6 +1,23 @@
 {{ define "main" }}
   <article class="flex flex-col items-center justify-center h-full mt-10 text-center">
     <header class="flex flex-col items-center mb-3">
+      {{ with .Site.Author.imagedark }}
+        {{ $srcdark := . }}
+        {{ $resourcedark := "" }}
+        {{ if $.Page.Resources.GetMatch $srcdark }}
+          {{ $resourcedark = $.Page.Resources.GetMatch $srcdark }}
+        {{ else if resources.GetMatch $srcdark }}
+          {{ $resourcedark = resources.Get $srcdark }}
+        {{ end }}
+        {{ with $resourcedark }}
+          {{ $srcdark = (.Fill "288x288").RelPermalink }}
+        {{ end }}
+      <picture>
+        <source
+          srcset={{ $srcdark }}
+          media="(prefers-color-scheme: dark)"
+        />
+      {{ end }}
       {{ with .Site.Author.image }}
         {{ $src := . }}
         {{ $resource := "" }}
@@ -12,12 +29,13 @@
         {{ with $resource }}
           {{ $src = (.Fill "288x288").RelPermalink }}
         {{ end }}
-        <img
-          class="mb-2"
-          width="400"
-          alt="{{ $.Site.Author.name | default "Author" }}"
-          src="{{ $src }}"
-        />
+          <img
+            class="mb-2"
+            width="400"
+            alt="{{ $.Site.Author.name | default "Author" }}"
+            src="{{ $src }}"
+          />
+        </picture>
       {{ end }}
       {{ with .Site.Author.headline }}
         <h2 class="text-xl text-neutral-500 dark:text-neutral-400">

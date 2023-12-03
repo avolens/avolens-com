@@ -137,7 +137,7 @@
       </div>
       {{ range .item }}
       <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="card rounded-0 text-center hover-outline-secondary">
+        <div class="card rounded-0 text-center hover-outline-secondary" style="height: 100%;">
           {{ with .image }}
           <img src="{{ .| absURL }}" style="width: 300px;" class="img-fluid align-self-center">
           {{ end }}

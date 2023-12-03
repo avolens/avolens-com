@@ -12,14 +12,19 @@ description : "AVOLENS GmbH Imprint"
 #### AVOLENS GmbH
 
 Konrad-Zuse-Strasse 10
+
 44799 Bochum
+
 Represented by:
+
 **Benjamin Koltermann**
 
 ## Contact
 
 **Phone**: +49 (0)234 33381648
+
 **E-mail**: webadmin@avolens.com
+
 **Contentwise responsible person according to § 55 Abs. 2RStV**: Benjamin Koltermann
 
 ## Disclaimer

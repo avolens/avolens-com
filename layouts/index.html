@@ -1,82 +1,202 @@
 {{ define "main" }}
-  <article class="flex flex-col items-center justify-center h-full mt-10 text-center">
-    <header class="flex flex-col items-center mb-3">
-      {{ with .Site.Author.imagedark }}
-        {{ $srcdark := . }}
-        {{ $resourcedark := "" }}
-        {{ if $.Page.Resources.GetMatch $srcdark }}
-          {{ $resourcedark = $.Page.Resources.GetMatch $srcdark }}
-        {{ else if resources.GetMatch $srcdark }}
-          {{ $resourcedark = resources.Get $srcdark }}
-        {{ end }}
-        {{ with $resourcedark }}
-          {{ $srcdark = (.Fill "288x288").RelPermalink }}
-        {{ end }}
-      <picture>
-        <source
-          srcset={{ $srcdark }}
-          media="(prefers-color-scheme: dark)"
-        />
-      {{ end }}
-      {{ with .Site.Author.image }}
-        {{ $src := . }}
-        {{ $resource := "" }}
-        {{ if $.Page.Resources.GetMatch $src }}
-          {{ $resource = $.Page.Resources.GetMatch $src }}
-        {{ else if resources.GetMatch $src }}
-          {{ $resource = resources.Get $src }}
-        {{ end }}
-        {{ with $resource }}
-          {{ $src = (.Fill "288x288").RelPermalink }}
-        {{ end }}
-          <img
-            class="mb-2"
-            width="400"
-            alt="{{ $.Site.Author.name | default "Author" }}"
-            src="{{ $src }}"
-          />
-        </picture>
-      {{ end }}
-      {{ with .Site.Author.headline }}
-        <h2 class="text-xl text-neutral-500 dark:text-neutral-400">
-          {{ . | markdownify | emojify }}
-        </h2>
-      {{ end }}
-      {{ with .Content }}
-        <section class="pt-5 prose dark:prose-invert">{{ . | emojify }}</section>
-      {{ end }}
-    </header>
-    {{ with .Site.Author.links }}
-      <div class="flex flex-col flex-wrap min-w-full mt-4 sm:min-w-0">
-        {{ range $links := . }}
-          {{ range $type, $data := $links }}
-            {{ $href := $data }}
-            {{ $icon := $type }}
-            {{ $text := i18n (printf "link.%s" $type) }}
-            {{ $target := "_blank" }}
-            {{ $title := "" }}
-            {{ if reflect.IsMap $data }}
-              {{ with $data.href }}{{ $href = . }}{{ end }}
-              {{ with $data.icon }}{{ $icon = . }}{{ end }}
-              {{ with $data.text }}{{ $text = . }}{{ end }}
-              {{ with $data.target }}{{ $target = . }}{{ end }}
-              {{ with $data.title }}{{ $title = . }}{{ end }}
-            {{ end }}
-            <a
-              class="link link-{{ $type }} sm:px-24 min-w-full py-2 mb-3 text-lg rounded"
-              href="{{ $href }}"
-              target="{{ $target }}"
-              {{ with $title }}title="{{ . }}"{{ end }}
-              rel="me noopener noreferrer"
-            >
-              {{- with $icon -}}
-                <span class="mr-1">{{ partial "icon.html" . }}</span>
-              {{- end -}}
-              {{ $text | emojify }}
-            </a>
+
+{{ $data := index .Site.Data }}
+
+<!-- hero area -->
+{{ with $data.homepage.banner }}
+<section id="home" class="hero-section bg-cover position-relative overlay"
+  style="background-image: url('{{ .bg_image | absURL }}');">
+  <div class="hero-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 mx-auto text-center">
+          <h1 class="text-white mb-5 text-capitalize">{{ .title | markdownify }}</h1>
+          <p class="text-light mb-4 mx-lg-5 px-lg-5 content">{{ .content | markdownify }}</p>
+          {{ if .button_solid.enable }}
+          {{ with .button_solid }}
+          <a href="{{ .link | relLangURL }}" class="btn btn-primary m-2">{{ .label }}</a>
           {{ end }}
+          {{ end }}
+
+          {{ if .button_outline.enable }}
+          {{ with .button_outline }}
+          <a href="{{ .link | relLangURL }}" class="btn btn-outline-primary m-2">{{ .label }}</a>
+          {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ end }}
+</section>
+<!-- /hero area -->
+
+<!-- cta -->
+{{ if $data.homepage.cta.enable }}
+{{ partial "cta.html" . }}
+{{ end }}
+
+<!-- about -->
+{{ if $data.homepage.about.enable }}
+{{ with $data.homepage.about }}
+<section id="about" class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mb-4 mb-md-0 pr-lg-5">
+        <img src="{{ .image | absURL }}" alt="about" class="img-fluid">
+      </div>
+      <div class="col-md-6 pl-lg-4">
+        <div class="content mb-4">{{ .content | markdownify }}</div>
+        {{ if .button.enable }}
+        {{ with .button }}
+        <a href="{{ .link | absLangURL }}" class="btn btn-primary">{{ .label }}</a>
+        {{ end }}
         {{ end }}
       </div>
-    {{ end }}
-  </article>
+    </div>
+  </div>
+</section>
+{{end}}
+{{end}}
+<!-- /about -->
+
+<!-- testimonial -->
+{{ if $data.homepage.testimonial.enable }}
+{{ with $data.homepage.testimonial }}
+<section id="customers" class="section bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      </div>
+    </div>
+    <div class="row">
+      {{ range .testimonial_item }}
+      <div class="col-lg-4 col-md-6">
+        <!-- Testimonial -->
+        <div class="testimonial-item">
+          <!-- Given Comment -->
+          <div class="comment match-height content">
+            {{ .content | markdownify }}
+          </div>
+          <div class="person">
+            <div class="media">
+              <!-- Person Image -->
+              <img src="{{ .image | absURL }}" alt="{{ .name }}">
+              <div class="media-body">
+                <h5>{{ .name | markdownify }}</h5>
+                <p class="mb-0">{{ .designation | markdownify }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+<!-- /testimonial -->
+
+<!-- service -->
+{{ if $data.homepage.service.enable }}
+{{ with $data.homepage.service }}
+<section id="services" class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      </div>
+      {{ range .service_item }}
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="card rounded-0 text-center hover-bg-secondary">
+          <div class="card-body p-4">
+            <i class="icon-rounded bg-primary text-white {{ .icon }} mb-4"></i>
+            <h4 class="card-title">{{ .title | markdownify }}</h4>
+            <P class="card-text content">{{ .content | markdownify }}</P>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+<!-- /service -->
+
+<!-- portfolio -->
+{{ if $data.homepage.portfolio.enable }}
+{{ with $data.homepage.portfolio }}
+<section id="portfolio" class="section bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2 class="section-title">{{ .title }}</h2>
+      </div>
+      {{ range .item }}
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="card rounded-0 text-center hover-outline-secondary">
+          {{ with .image }}
+          <img src="{{ .| absURL }}" style="width: 300px;" class="img-fluid align-self-center">
+          {{ end }}
+          <div class="card-body">
+            <h4 class="card-title">{{ .title | markdownify }}</h4>
+            <p class="card-text">{{ .content }}</p>
+            {{ if .button.enable }}
+            {{ with .button }}
+            <a href="{{ .link }}" class="btn btn-sm btn-primary">{{ .text }}</a>
+            {{ end }}
+            {{ end }}
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+<!-- /portfolio -->
+
+<!-- team -->
+{{ if $data.homepage.team.enable }}
+{{ with $data.homepage.team }}
+<section id="team" class="section">
+  <div class="container">
+    <div style="justify-content: center;" class="row">
+      <div class="col-12 text-center">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      </div>
+      {{ range .member }}
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="card rounded-0 text-center hover-outline-secondary">
+          <div class="card-body pt-4">
+            <img src="{{ .image | absURL}}" alt="" class="img-sm mx-auto rounded-circle mb-4">
+            <h4 class="card-title">{{ .name | markdownify }}</h4>
+            <p class="h5 mb-0">{{ .designation | markdownify }}</p>
+            <a href="mailto:{{ .email }}">{{ .email }}</a>
+            <ul class="list-inline mt-3 mb-0">
+              {{ range .social }}
+              <li class="list-inline-item mx-2"><a href="{{ .link | safeURL }}"><i class="{{ .icon }}"></i></a></li>
+              {{ end }}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+<!-- /team -->
+
+<!-- clients -->
+{{ if $data.homepage.clients_logo.enable }}
+{{ partial "clients-logo-slider.html" . }}
+{{ end }}
+<!-- /clients -->
+
 {{ end }}

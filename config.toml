@@ -1,22 +1,175 @@
-theme = "lynx"
-title = "AVOLENS"
+######################## default configuration ####################
+baseURL = "https://avolens.com/"
+title = "AVOLENS | Modern Cloud and Kubernetes Security"
+theme = "redlab-hugo"
+# post pagination
+paginate = "6"
+# post excerpt
+summaryLength = "10"
+# disqus short name
+disqusShortname = "" # get your shortname form here : https://disqus.com
+# disable language
+disableLanguages = true # disable language from here
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+############################# Plugins ##############################
+
+# CSS Plugins
+[[params.plugins.css]]
+link = "plugins/bootstrap/bootstrap.min.css"
+[[params.plugins.css]]
+link = "plugins/slick/slick.css"
+[[params.plugins.css]]
+link = "plugins/magnific-popup/magnific-popup.css"
+[[params.plugins.css]]
+link = "plugins/themify-icons/themify-icons.css"
+
+# JS Plugins
+[[params.plugins.js]]
+link = "plugins/jQuery/jquery.min.js"
+[[params.plugins.js]]
+link = "plugins/bootstrap/bootstrap.min.js"
+[[params.plugins.js]]
+link = "plugins/slick/slick.min.js"
+[[params.plugins.js]]
+link = "plugins/match-height/jquery.matchHeight-min.js"
+[[params.plugins.js]]
+link = "plugins/shuffle/shuffle.min.js"
+[[params.plugins.js]]
+link = "plugins/magnific-popup/jquery.magnific.popup.min.js"
+[[params.plugins.js]]
+link = "plugins/search/fuse.min.js"
+[[params.plugins.js]]
+link = "plugins/search/mark.js"
+[[params.plugins.js]]
+link = "plugins/search/search.js"
+[[params.plugins.js]]
+link = "plugins/google-map/gmap.js"
+
+############################## navigation ###############################
+# main menu
+[[menu.main]]
+name = "About"
+URL = "/#about"
+weight = 1
+
+[[menu.main]]
+name = "Portfolio"
+URL = "/#portfolio"
+weight = 2
+
+[[menu.main]]
+name = "Team"
+URL = "/#team"
+weight = 3
+
+[[menu.main]]
+weight = 4
+name = "Products"
+hasChildren = true
+
+  [[menu.main]]
+  parent = "Products"
+  name = "CyLens"
+  URL = "https://cylens.de"
+
+  [[menu.main]]
+  parent = "Products"
+  name = "Managed Kubernetes Security"
+  URL = "/contact"
+
+  [[menu.main]]
+  parent = "Products"
+  name = "KubeFuzz"
+  URL = "https://kubefuzz.io"
+
+# footer menu
+[[menu.footer]]
+name = "About Us"
+URL = "/#about"
+weight = 1
+
+[[menu.footer]]
+name = "Our Portfolio"
+URL = "/#portfolio"
+weight = 2
+
+[[menu.footer]]
+name = "Imprint"
+URL = "/imprint"
+weight = 3
+
+[[menu.footer]]
+name = "Privacy Policy"
+URL = "/privacy-policy"
+weight = 4
+
+#################### default parameters ################################
+[params]
+logo = "img/avolens/dark-mode/png/AVOLENS_LogoWithText_Horizontal_Dark.png"
+home = "Home"
+# Meta data
+description = "AVOLENS GmbH Website"
+author = "AVOLENS GmbH"
+# contact info
+address = "Konrad-Zuse-Straße 10, 44801 Bochum, Germany"
+mobile = "+49 (0)234 33381648"
+email = "info@avolens.com"
+# contact form action
+contact_form_action = "https://formspree.io/f/xnqkkyep" # contact form works with https://formspree.io
+# Google Analitycs
+google_analitycs_id = "" # your id
+# search
+search = false
+footer_content = "AVOLENS GmbH was founded in Bochum, Germany in 2022 and has been dealing with cloud and Kubernetes security ever since."
+footer_background = "img/background-header.jpg"
+
+# Preloader
+[params.preloader]
+enable = true
+preloader = "img/avolens/light-mode/png/AVOLENS_LogoWithText_Vertical_Light.png" # use jpg, png, svg or gif format.
+
+# Navigation button
+[params.navigation_button]
+enable = true
+label = "Contact Us"
+link = "contact"
+
+# google map
+[params.map]
+enable = true
+gmap_api = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDBzJtMgw05wh_k-JHZC4DVMpFYuaEMTrw"
+map_latitude = "51.44920218961477"
+map_longitude = "7.276117653152309"
+map_marker = "img/icons/marker.png"
 
 
-enableEmoji = true
-disableKinds = ["taxonomy", "term"]
+###################### Clients logo slider ###############################
+[[params.clients_logo]]
+logo = "img/clients/acs.svg"
 
-[author]
-  name = "AVOLENS"
-  headline = "Modern Cloud and Kubernetes Security"
-  image = "img/avolens-logo.png"
-  imagedark = "img/avolens-logo-dark.png"
-  links = [
-    { avolens = { href = "mailto:info@avolens.com", text = "Contact us", icon = "email" } },
-    { avolens = { href = "https://kubernetes-security.de", text = "Visit our blog", icon = "medium" } },
-    { github = "https://github.com/avolens/" },
-  ]
+[[params.clients_logo]]
+logo = "img/clients/cis.png"
 
-[markup.highlight]
-  noClasses = false
-[Params]
-  custom_css = ["css/avolens.css"]
+############################# social icon #################################
+# [[params.social]]
+# icon = "ti-facebook" # themify icon pack : https://themify.me/themify-icons
+# link = "#"
+
+[[params.social]]
+icon = "ti-twitter-alt" # themify icon pack : https://themify.me/themify-icons
+link = "https://twitter.com/AVOLENS_ITSec"
+
+[[params.social]]
+icon = "ti-linkedin" # themify icon pack : https://themify.me/themify-icons
+link = "https://www.linkedin.com/company/avolens-gmbh"
+
+[[params.social]]
+icon = "ti-github" # themify icon pack : https://themify.me/themify-icons
+link = "https://github.com/avolens"
+
+# [[params.social]]
+# icon = "ti-instagram" # themify icon pack : https://themify.me/themify-icons
+# link = "#"

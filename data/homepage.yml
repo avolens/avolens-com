@@ -117,7 +117,7 @@ portfolio:
       content: "CyLens is your trusted tool in securing and governing your different environments. With CyLens, you can take control of your environment's security, compliance, and governance. Our platform empowers you to define, enforce, and manage policies efficiently."
       button:
         enable: true
-        link: "https://cylens.de"
+        link: "https://docs.cylens.de"
         text: "Have a look"
 
     - title: "Managed Kubernetes Security"

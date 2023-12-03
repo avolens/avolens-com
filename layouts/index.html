@@ -146,7 +146,9 @@
             <p class="card-text">{{ .content }}</p>
             {{ if .button.enable }}
             {{ with .button }}
-            <a href="{{ .link }}" class="btn btn-sm btn-primary">{{ .text }}</a>
+            <div>
+              <a href="{{ .link }}" class="btn btn-sm btn-primary">{{ .text }}</a>
+            </div>
             {{ end }}
             {{ end }}
           </div>

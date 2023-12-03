@@ -148,7 +148,7 @@ map_marker = "img/icons/marker.png"
 
 ###################### Clients logo slider ###############################
 [[params.clients_logo]]
-logo = "img/clients/adestis.svg"
+logo = "img/clients/adestis.png"
 
 [[params.clients_logo]]
 logo = "img/clients/acs.svg"

@@ -151,10 +151,13 @@ map_marker = "img/icons/marker.png"
 logo = "img/clients/adestis.png"
 
 [[params.clients_logo]]
-logo = "img/clients/acs.svg"
+logo = "img/clients/soeldner-consult.png"
 
 [[params.clients_logo]]
 logo = "img/clients/cis.png"
+
+[[params.clients_logo]]
+logo = "img/clients/acs.svg"
 
 ############################# social icon #################################
 # [[params.social]]

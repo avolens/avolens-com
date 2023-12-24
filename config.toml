@@ -77,13 +77,13 @@ hasChildren = true
 
   [[menu.main]]
   parent = "Products"
-  name = "Managed Kubernetes Security"
-  URL = "/contact"
+  name = "KubeFuzz"
+  URL = "https://kubefuzz.io"
 
   [[menu.main]]
   parent = "Products"
-  name = "KubeFuzz"
-  URL = "https://kubefuzz.io"
+  name = "Managed Kubernetes Security"
+  URL = "/contact"
 
 # footer menu
 [[menu.footer]]
